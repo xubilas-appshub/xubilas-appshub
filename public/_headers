@@ -1,0 +1,9 @@
+/OneSignalSDKWorker.js
+  Cache-Control: no-cache, no-store, must-revalidate
+  Content-Type: application/javascript
+  Service-Worker-Allowed: /
+
+/OneSignalSDKUpdaterWorker.js
+  Cache-Control: no-cache, no-store, must-revalidate
+  Content-Type: application/javascript
+  Service-Worker-Allowed: /
