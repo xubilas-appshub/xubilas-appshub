@@ -31,11 +31,22 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-  // Network First strategy
+  const url = new URL(event.request.url);
+
+  // Skip caching for OneSignal requests, non-HTTP, and non-GET requests
+  // to prevent interference with push notification delivery
+  if (
+    url.hostname.includes('onesignal.com') ||
+    !event.request.url.startsWith('http') ||
+    event.request.method !== 'GET'
+  ) {
+    return;
+  }
+
+  // Network First strategy for app requests only
   event.respondWith(
     fetch(event.request)
       .then((response) => {
-        // If successful, clone and cache it
         if (response.status === 200) {
           const responseClone = response.clone();
           caches.open(CACHE_NAME).then((cache) => {
@@ -45,7 +56,6 @@ self.addEventListener('fetch', (event) => {
         return response;
       })
       .catch(() => {
-        // If network fails, try cache
         return caches.match(event.request);
       })
   );

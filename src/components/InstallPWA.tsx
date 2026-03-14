@@ -8,7 +8,7 @@ export const InstallPWA: React.FC = () => {
 
   useEffect(() => {
     const handler = (e: any) => {
-      // Prevent Chrome 67 and earlier from automatically showing the prompt
+      // Prevent the browser from showing its own install prompt
       e.preventDefault();
       // Stash the event so it can be triggered later.
       setDeferredPrompt(e);
@@ -16,14 +16,24 @@ export const InstallPWA: React.FC = () => {
       setIsVisible(true);
     };
 
+    const onInstalled = () => {
+      // Hide the button once the app is installed
+      setDeferredPrompt(null);
+      setIsVisible(false);
+    };
+
     window.addEventListener('beforeinstallprompt', handler);
+    window.addEventListener('appinstalled', onInstalled);
 
     // Check if already installed
     if (window.matchMedia('(display-mode: standalone)').matches) {
       setIsVisible(false);
     }
 
-    return () => window.removeEventListener('beforeinstallprompt', handler);
+    return () => {
+      window.removeEventListener('beforeinstallprompt', handler);
+      window.removeEventListener('appinstalled', onInstalled);
+    };
   }, []);
 
   const handleInstallClick = async () => {
