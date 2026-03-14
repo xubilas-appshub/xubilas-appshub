@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Outfit", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-brand-50: #f0fdf4;
+  --color-brand-100: #dcfce7;
+  --color-brand-500: #22c55e;
+  --color-brand-600: #16a34a;
+  --color-brand-700: #15803d;
+}
+
+@layer base {
+  html[data-theme='dark'] {
+    --bg-main: theme('colors.neutral.950');
+    --bg-main-rgb: 10, 10, 10;
+    --text-main: theme('colors.neutral.50');
+    --card-bg: linear-gradient(135deg, #3e2723 0%, #1b1b1b 100%);
+    --card-border: #5d4037;
+    --header-bg: linear-gradient(to right, #2d1b18, #1a1a1a);
+    --hero-bg: linear-gradient(135deg, #2d1b18 0%, #0a0a0a 100%);
+    --search-bg: #1a1a1a;
+  }
+
+  :root {
+    --bg-main: theme('colors.neutral.50');
+    --bg-main-rgb: 250, 250, 250;
+    --text-main: theme('colors.neutral.900');
+    --card-bg: theme('colors.white');
+    --card-border: theme('colors.neutral.200');
+    --header-bg: rgba(255, 255, 255, 0.8);
+    --hero-bg: theme('colors.neutral.900');
+    --search-bg: theme('colors.white');
+  }
+
+  html[data-theme='grey'] {
+    --bg-main: #e5e7eb; /* neutral-200 */
+    --bg-main-rgb: 229, 231, 235;
+    --text-main: #111827; /* neutral-900 */
+    --card-bg: #f9fafb; /* neutral-50 */
+    --card-border: #d1d5db; /* neutral-300 */
+  }
+
+  html, body {
+    @apply font-sans antialiased transition-colors duration-300;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+  }
+  
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar,
+  *::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+  }
+}
+
+@utility scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.glass {
+  @apply bg-white/80 backdrop-blur-md border border-white/20;
+}
+
+.card-hover {
+  @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
+}
