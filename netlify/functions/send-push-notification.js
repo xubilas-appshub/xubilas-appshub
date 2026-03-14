@@ -6,7 +6,7 @@ export default async (req) => {
     });
   }
 
-  const ONESIGNAL_APP_ID = process.env.ONESIGNAL_APP_ID || 'fd48af87-2101-4118-9c5f-795a6478758b';
+  const ONESIGNAL_APP_ID = process.env.ONESIGNAL_APP_ID || '368b352f-fed6-46db-b501-b5b2cb592949';
   const ONESIGNAL_REST_API_KEY = process.env.ONESIGNAL_REST_API_KEY;
 
   if (!ONESIGNAL_REST_API_KEY) {
