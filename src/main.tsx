@@ -4,7 +4,7 @@ import App from './App.tsx';
 import './index.css';
 
 if ('serviceWorker' in navigator) {
-  // OneSignal SDK handles registering /sw.js (which includes both
+  // OneSignal SDK handles registering OneSignalSDKWorker.js (which includes both
   // the OneSignal push worker and the app caching worker).
   // We only set up update detection and controller-change handling here.
   navigator.serviceWorker.ready.then(registration => {
